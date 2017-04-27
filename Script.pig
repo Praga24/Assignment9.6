@@ -1,6 +1,7 @@
 --Load data
 
-A = LOAD 'home/acadgild/Downloads/temperature.csv' USING PigStorage(',') AS (station:chararray,date:chararray,type:chararray,temperature:int);
+A = LOAD 'home/acadgild/Downloads/temperature.csv' USING PigStorage(',') AS 
+    (station:chararray,date:chararray,type:chararray,temperature:int);
 
 
 --Pig script to find the minimum temperature observed in a given weather station in a particular year.
@@ -25,4 +26,4 @@ D = FOREACH C GENERATE (group,MAX(B.temperature));
 
 B = GROUP temperature BY station;
 
-C = FOREACH B GENERATE(group,COUNT(temperature.type));
+C = FOREACH B GENERATE(group,COUNT(A.type));
